@@ -33,7 +33,6 @@ import rx.Observable
 import rx.Subscription
 
 import java.lang.ref.SoftReference
-import java.util.concurrent.Flow
 import kotlin.math.min
 
 object XRayServiceManager {
@@ -252,11 +251,8 @@ object XRayServiceManager {
         val startMainIntent = Intent(service, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(service,
             NOTIFICATION_PENDING_INTENT_CONTENT, startMainIntent,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-            } else {
-                PendingIntent.FLAG_UPDATE_CURRENT
-            })
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val stopV2RayIntent = Intent(AppConstants.BROADCAST_ACTION_SERVICE)
         stopV2RayIntent.`package` = ANG_PACKAGE
@@ -264,11 +260,8 @@ object XRayServiceManager {
 
         val stopV2RayPendingIntent = PendingIntent.getBroadcast(service,
             NOTIFICATION_PENDING_INTENT_STOP_V2RAY, stopV2RayIntent,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-            } else {
-                PendingIntent.FLAG_UPDATE_CURRENT
-            })
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val channelId =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

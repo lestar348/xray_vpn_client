@@ -1,6 +1,5 @@
 package com.synaptic.xcorevpn.services
 
-import android.app.Notification
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -231,15 +230,15 @@ class XRayVpnService : VpnService(), ServiceControl {
             process = proBuilder
                 .directory(applicationContext.filesDir)
                 .start()
-            Thread(Runnable {
-                Log.d(packageName,"$TUN2SOCKS check")
+            Thread {
+                Log.d(packageName, "$TUN2SOCKS check")
                 process.waitFor()
-                Log.d(packageName,"$TUN2SOCKS exited")
+                Log.d(packageName, "$TUN2SOCKS exited")
                 if (isRunning) {
-                    Log.d(packageName,"$TUN2SOCKS restart")
+                    Log.d(packageName, "$TUN2SOCKS restart")
                     runTun2socks()
                 }
-            }).start()
+            }.start()
             Log.d(packageName, process.toString())
 
             sendFd()
@@ -284,7 +283,7 @@ class XRayVpnService : VpnService(), ServiceControl {
 //        val emptyInfo = VpnNetworkInfo()
 //        val info = loadVpnNetworkInfo(configName, emptyInfo)!! + (lastNetworkInfo ?: emptyInfo)
 //        saveVpnNetworkInfo(configName, info)
-        isRunning = false;
+        isRunning = false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             try {
                 connectivity.unregisterNetworkCallback(defaultNetworkCallback)

@@ -1,19 +1,12 @@
 package com.synaptic.xcorevpn.ui.components.debug
 
-import android.R.attr.label
-import android.R.attr.text
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
-import androidx.core.content.ContextCompat.getSystemService
+
 
 
 @Composable

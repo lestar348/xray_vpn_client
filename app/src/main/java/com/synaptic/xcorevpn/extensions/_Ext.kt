@@ -1,6 +1,5 @@
 package com.synaptic.xcorevpn.extensions
 
-import android.os.Build
 import org.json.JSONObject
 import java.net.URI
 import java.net.URLConnection

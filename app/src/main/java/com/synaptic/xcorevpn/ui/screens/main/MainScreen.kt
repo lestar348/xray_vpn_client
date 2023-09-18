@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.synaptic.xcorevpn.ui.components.VpnButton
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.synaptic.xcorevpn.R
 import com.synaptic.xcorevpn.models.VpnState
 import com.synaptic.xcorevpn.ui.components.VpnIndicator
 import com.synaptic.xcorevpn.ui.components.debug.CopyConfigButton

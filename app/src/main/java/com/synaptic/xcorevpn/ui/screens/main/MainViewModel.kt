@@ -1,11 +1,7 @@
 package com.synaptic.xcorevpn.ui.screens.main
 
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.net.VpnService
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import com.synaptic.xcorevpn.AppConstants
 import com.synaptic.xcorevpn.models.VpnState

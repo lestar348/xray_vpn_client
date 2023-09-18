@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.net.Uri
-import android.os.Build
 import android.os.LocaleList
 import android.util.Log
 import android.util.Patterns
