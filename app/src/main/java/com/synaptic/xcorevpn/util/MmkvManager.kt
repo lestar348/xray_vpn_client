@@ -43,6 +43,10 @@ object MmkvManager {
         return Gson().fromJson(json, ServerConfig::class.java)
     }
 
+    fun getSelectedServerUUID(): String? = mainStorage?.decodeString(KEY_SELECTED_SERVER)
+
+    fun selectServer(guid: String) = mainStorage?.encode(KEY_SELECTED_SERVER, guid)
+
     fun encodeServerConfig(guid: String, config: ServerConfig): String {
         val key = guid.ifBlank { Utils.getUuid() }
         serverStorage?.encode(key, Gson().toJson(config))
@@ -51,7 +55,7 @@ object MmkvManager {
             serverList.add(0, key)
             mainStorage?.encode(KEY_ANG_CONFIGS, Gson().toJson(serverList))
             if (mainStorage?.decodeString(KEY_SELECTED_SERVER).isNullOrBlank()) {
-                mainStorage?.encode(KEY_SELECTED_SERVER, key)
+                selectServer(key)
             }
         }
         return key
@@ -160,7 +164,7 @@ object MmkvManager {
         }
     }
 
-    fun sortByTestResults( ) {
+    fun sortByTestResults() {
         data class ServerDelay(var guid: String, var testDelayMillis: Long)
 
         val serverDelays = mutableListOf<ServerDelay>()

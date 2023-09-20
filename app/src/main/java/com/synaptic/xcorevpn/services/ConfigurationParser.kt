@@ -1,6 +1,8 @@
 package com.synaptic.xcorevpn.services
 
 import android.net.Uri
+import android.util.Log
+import com.synaptic.xcorevpn.AppConstants
 import com.synaptic.xcorevpn.AppConstants.PREF_ALLOW_INSECURE
 import com.synaptic.xcorevpn.extensions.fromBase64
 import com.synaptic.xcorevpn.models.ProtocolType
@@ -43,6 +45,7 @@ object ConfigurationParser {
         val decodedConfig = encodedConfig.fromBase64()
         val configurationList = decodedConfig.split("\n")
         configurationList.forEach { saveConfig(config = it) }
+        Log.d(AppConstants.ANG_PACKAGE, "parse complete")
     }
 
     private fun saveConfig(config: String) {
@@ -83,9 +86,9 @@ object ConfigurationParser {
             )
         }
         if(serverConfig.subscriptionId.isEmpty()) {
-            serverConfig.subscriptionId = ""
+            serverConfig.subscriptionId = UUID.randomUUID().toString()
         }
-        MmkvManager.encodeServerConfig(UUID.randomUUID().toString(), serverConfig)
+        MmkvManager.encodeServerConfig(serverConfig.subscriptionId, serverConfig)
     }
 
     private fun saveStreamSettings(

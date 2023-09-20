@@ -2,6 +2,20 @@ package com.synaptic.xcorevpn.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+object LightColors{
+    val background = Color(0xFFF3F4FA)
+    val surface = Color(0xFFF0F1F6)
+    val onSurface = Color(0xFFF0F1F4)
+    val primary = Color(0xFF04F639)
+    val error = Color(0xFFF60404)
+    val errorContainer = Color(0xFF9C9E33)
+    val textColor = Color(0xFF9FA0A5)
+
+    // Shadows
+    val dropShadowColor = Color(0xFFCECFD4)
+    val InnerShadowColor = Color(0xFFBBBCBE)
+}
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)

@@ -10,25 +10,23 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
+private val _darkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
-private val LightColorScheme = lightColorScheme(
-    background = Color(0xFFF3F4FA),
-    surface = Color(0xFFF0F1F6),
-    onSurface = Color(0xFFF0F1F4),
-    primary = Color(0xFF04F639),
-    error = Color(0xFFF60404),
-    errorContainer = Color(0xFF9C9E33)
+private val _lightColorScheme = lightColorScheme(
+    background = LightColors.background,
+    surface = LightColors.surface,
+    onSurface = LightColors.onSurface,
+    primary = LightColors.primary,
+    error = LightColors.error,
+    errorContainer = LightColors.errorContainer
 
 //    secondary = PurpleGrey40,
 //    tertiary = Pink40
@@ -57,21 +55,24 @@ fun XcoreVPNTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> _darkColorScheme
+        else -> _lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = if(darkTheme) {
+            DarkTypography
+        } else {
+            LightTypography
+        },
         content = content
     )
 }
