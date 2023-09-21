@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.VpnService
 import androidx.lifecycle.ViewModel
 import com.synaptic.xcorevpn.AppConstants
+import com.synaptic.xcorevpn.models.ConfigEvent
 import com.synaptic.xcorevpn.models.VpnState
 import com.synaptic.xcorevpn.services.XRayServiceManager
 import com.synaptic.xcorevpn.util.MmkvManager
@@ -13,7 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-
 
 
 class MainViewModel : ViewModel() {
@@ -35,6 +35,12 @@ class MainViewModel : ViewModel() {
 
     val vpnState: StateFlow<VpnState> = _vpnState.asStateFlow()
     val serverList: StateFlow<MutableList<String>> = _serverList.asStateFlow()
+
+    fun handleConfigEvent(configEvent: ConfigEvent){
+        if(configEvent == ConfigEvent.NeedUpdate){
+            updateServerList()
+        }
+    }
 
     /*
     * Activate vpn, return false if need request VPN permission
@@ -68,10 +74,12 @@ class MainViewModel : ViewModel() {
         XRayServiceManager.startV2Ray(context)
     }
 
-    fun updateServerList(){
+    private fun updateServerList(){
         _serverList.update { MmkvManager.decodeServerList() }
         if(serverList.value.isEmpty()){
             updateVPNState(VpnState.NoConfigFile)
+        }else if(vpnState.value == VpnState.NoConfigFile || vpnState.value == VpnState.Unknown) {
+            updateVPNState(VpnState.Disable)
         }
     }
 

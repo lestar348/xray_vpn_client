@@ -17,14 +17,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.synaptic.xcorevpn.ui.components.VpnButton
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.synaptic.xcorevpn.BuildConfig
 import com.synaptic.xcorevpn.R
-import com.synaptic.xcorevpn.XcoreAppScreen
 import com.synaptic.xcorevpn.models.VpnState
+import com.synaptic.xcorevpn.services.EventHandler
 import com.synaptic.xcorevpn.ui.components.CircleButton
 import com.synaptic.xcorevpn.ui.components.VpnIndicator
 import com.synaptic.xcorevpn.ui.components.debug.CopyConfigButton
@@ -45,6 +46,11 @@ fun MainScreen(
                 viewModel.activeVPN(context)
             }
         }
+
+    val listener =  EventHandler().subscribeConfigEvent(
+        lifecycleOwner = LocalLifecycleOwner.current,
+        onHandle = viewModel::handleConfigEvent
+    )
 
     Column(
         verticalArrangement = Arrangement.SpaceEvenly,

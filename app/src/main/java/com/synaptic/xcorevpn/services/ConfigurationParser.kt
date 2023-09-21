@@ -5,6 +5,7 @@ import android.util.Log
 import com.synaptic.xcorevpn.AppConstants
 import com.synaptic.xcorevpn.AppConstants.PREF_ALLOW_INSECURE
 import com.synaptic.xcorevpn.extensions.fromBase64
+import com.synaptic.xcorevpn.models.ConfigEvent
 import com.synaptic.xcorevpn.models.ProtocolType
 import com.synaptic.xcorevpn.models.ServerConfig
 import com.synaptic.xcorevpn.models.XrayConfig
@@ -45,6 +46,7 @@ object ConfigurationParser {
         val decodedConfig = encodedConfig.fromBase64()
         val configurationList = decodedConfig.split("\n")
         configurationList.forEach { saveConfig(config = it) }
+        EventHandler().postEvent(ConfigEvent.NeedUpdate)
         Log.d(AppConstants.ANG_PACKAGE, "parse complete")
     }
 
