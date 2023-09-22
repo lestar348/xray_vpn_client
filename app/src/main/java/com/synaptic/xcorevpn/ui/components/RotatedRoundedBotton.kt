@@ -49,24 +49,25 @@ fun Modifier.vpnButtonShadow() = then(
         .shadow(
             color = LightColors.dropShadowColor.copy(alpha = 0.2F),
             offsetY = 5.dp,
-            blurRadius = 10.dp
+            blurRadius = 10.dp,
+            borderRadius = 80.dp
         )
         .shadow(
             color = LightColors.dropShadowColor.copy(alpha = 0.2F),
             offsetX = 5.dp,
             offsetY = (-5).dp,
-            blurRadius = 10.dp
+            blurRadius = 10.dp, borderRadius = 80.dp
         )
         .shadow(
             color = Color.White.copy(alpha = 0.9F),
             offsetX = (-5).dp,
             offsetY = (-5).dp,
-            blurRadius = 10.dp
+            blurRadius = 10.dp, borderRadius = 80.dp
         )
         .shadow(
             color = LightColors.dropShadowColor.copy(alpha = 0.9F),
             offsetX = 5.dp,
             offsetY = 5.dp,
-            blurRadius = 13.dp
+            blurRadius = 13.dp, borderRadius = 80.dp
         )
 )

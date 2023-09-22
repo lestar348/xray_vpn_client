@@ -1,6 +1,7 @@
 package com.synaptic.xcorevpn.util
 
 
+
 import com.google.gson.Gson
 import com.synaptic.xcorevpn.models.ServerAffiliationInfo
 import com.synaptic.xcorevpn.models.ServerConfig

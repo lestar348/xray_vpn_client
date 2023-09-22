@@ -27,6 +27,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:hardwareAccelerated="@bool/hardwareAccelerated"
             android:theme="@style/Theme.XcoreVPN">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
