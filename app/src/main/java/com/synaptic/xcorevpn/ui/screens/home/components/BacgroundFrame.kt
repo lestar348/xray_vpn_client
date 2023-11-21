@@ -22,12 +22,7 @@ fun BackgroundFrame(){
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(0.dp, 0.dp, 50.dp, 50.dp))
             .background(
-                brush = Brush.verticalGradient(
-                    listOf(
-                        LightColors.bgFrameLinearGradient1Color,
-                        LightColors.bgFrameLinearGradient2Color
-                    )
-                )
+                brush = LightColors.homeBGFrameGradient
             )
         )
 

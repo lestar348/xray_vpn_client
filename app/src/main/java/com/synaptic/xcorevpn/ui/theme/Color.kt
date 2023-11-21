@@ -1,6 +1,7 @@
 package com.synaptic.xcorevpn.ui.theme
 
 import androidx.annotation.ColorRes
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 object LightColors{
@@ -9,7 +10,6 @@ object LightColors{
     val surface = Color(0xFFF0F1F6)
     val onSurface = Color(0xFFF0F1F4)
     val primary = Color(0xFF04F639)
-    val error = Color(0xFFF60404)
     val errorContainer = Color(0xFF9C9E33)
     val textColor = Color(0xFF9FA0A5)
 
@@ -25,6 +25,21 @@ object LightColors{
     val purple = Color(0xff978FFF)
     val black = Color(0xff090F1E)
     val red = Color(0xFFFF7373)
+
+    val error = Color(0xFFDE0000)
+
+    // Gradients
+    val loginBGGradient = Brush.verticalGradient(listOf(
+        purple,
+        Color(0xFFD1CEFF)
+    ))
+
+    val homeBGFrameGradient = Brush.verticalGradient(
+        listOf(
+            bgFrameLinearGradient1Color,
+            bgFrameLinearGradient2Color
+        )
+    )
 
 }
 

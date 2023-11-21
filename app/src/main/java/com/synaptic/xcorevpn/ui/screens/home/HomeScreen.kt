@@ -21,12 +21,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.synaptic.xcorevpn.XcoreAppScreen
 import com.synaptic.xcorevpn.models.ConnectProblem
 import com.synaptic.xcorevpn.models.VPNConnectException
-import com.synaptic.xcorevpn.models.VpnState
 import com.synaptic.xcorevpn.services.navigation.AppRouts
 import com.synaptic.xcorevpn.services.navigation.NavigationService
 import com.synaptic.xcorevpn.ui.screens.home.components.BackgroundFrame
@@ -40,7 +36,7 @@ import com.synaptic.xcorevpn.ui.screens.home.implementation.HomeViewModelPreveiw
 
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel,){
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel){
     val vpnState by viewModel.vpnState.collectAsState()
     val currentLocation by viewModel.currentServerLocation.collectAsState()
 

@@ -2,7 +2,6 @@ package com.synaptic.xcorevpn.services.navigation
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.synaptic.xcorevpn.ui.screens.home.HomeScreen
 import com.synaptic.xcorevpn.ui.screens.home.implementation.HomeViewModelImp
