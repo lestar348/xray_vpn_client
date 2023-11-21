@@ -5,5 +5,15 @@ enum class VpnState() {
     Disable,
     Connecting,
     NoConfigFile,
-    Unknown,
+    Unknown;
+
+    val statusText: String get() = when(this){
+        Active-> "VPN on"
+        Disable -> "VPN off"
+        Connecting -> "Connection..."
+        NoConfigFile -> "Please accept VPN Configuration"
+        Unknown -> "Unknown"
+    }
 }
+
+

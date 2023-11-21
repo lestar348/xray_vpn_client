@@ -16,6 +16,8 @@ import com.synaptic.xcorevpn.ui.components.CircleButton
 import com.synaptic.xcorevpn.ui.screens.main.MainScreen
 import com.synaptic.xcorevpn.ui.screens.servers.ServerScreen
 import com.synaptic.xcorevpn.ui.components.CircleButton
+import com.synaptic.xcorevpn.ui.screens.home.HomeScreen
+import com.synaptic.xcorevpn.ui.screens.home.implementation.HomeViewModelImp
 
 enum class XcoreAppScreen() {
     Main,
@@ -33,9 +35,10 @@ fun XcoreApp(navController: NavHostController = rememberNavController()) {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = XcoreAppScreen.Main.name) {
-                MainScreen(
-                    onServerSettingsClick = { navController.navigate(XcoreAppScreen.Servers.name)}
-                )
+                HomeScreen(viewModel = HomeViewModelImp())
+//                MainScreen(
+//                    onServerSettingsClick = { navController.navigate(XcoreAppScreen.Servers.name)}
+//                )
             }
             composable(route = XcoreAppScreen.Servers.name) {
                 ServerScreen(

@@ -30,6 +30,7 @@ import com.synaptic.xcorevpn.models.VpnState
 import com.synaptic.xcorevpn.services.EventHandler
 import com.synaptic.xcorevpn.ui.components.CircleButton
 import com.synaptic.xcorevpn.ui.components.VpnIndicator
+import com.tencent.mmkv.MMKV
 
 
 @Composable
