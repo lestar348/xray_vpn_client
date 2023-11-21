@@ -12,6 +12,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.synaptic.xcorevpn.services.navigation.AppRouts
+import com.synaptic.xcorevpn.services.navigation.NavigationService
+import com.synaptic.xcorevpn.services.navigation.navigationGraph
 import com.synaptic.xcorevpn.ui.components.CircleButton
 import com.synaptic.xcorevpn.ui.screens.main.MainScreen
 import com.synaptic.xcorevpn.ui.screens.servers.ServerScreen
@@ -26,26 +29,16 @@ enum class XcoreAppScreen() {
 
 @Composable
 fun XcoreApp(navController: NavHostController = rememberNavController()) {
+    NavigationService.shared = NavigationService(navController = navController)
     Scaffold (
         containerColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
         NavHost(
-            navController = navController,
-            startDestination = XcoreAppScreen.Main.name,
+            navController = NavigationService.shared.navController,
+            startDestination = AppRouts.Home.name,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(route = XcoreAppScreen.Main.name) {
-                HomeScreen(viewModel = HomeViewModelImp())
-//                MainScreen(
-//                    onServerSettingsClick = { navController.navigate(XcoreAppScreen.Servers.name)}
-//                )
-            }
-            composable(route = XcoreAppScreen.Servers.name) {
-                ServerScreen(
-                    onBackButtonClick = { navController.popBackStack() }
-                )
-            }
-
+            navigationGraph()
         }
 
     }
