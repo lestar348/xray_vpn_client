@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,21 +28,10 @@ import com.synaptic.xcorevpn.ui.screens.login.components.EnteringTextField
 import com.synaptic.xcorevpn.ui.screens.login.components.LoginHugeText
 import com.synaptic.xcorevpn.ui.theme.LightColors
 
-enum class LoginTextFieldError{
-
-    Ok, IncorrectEmail, EmailNotFound, IncorrectCode;
-    val description: String
-        get() =  when(this){
-              Ok ->  "";
-            IncorrectEmail->"*Incorrect email";
-            EmailNotFound->"*Email not found in database";
-            IncorrectCode->"*Incorrect code";
-            }
-}
 
 @Composable
-fun LoginScreen(){
-    val textState = remember { mutableStateOf(TextFieldValue()) }
+fun LoginScreen(viewModel: LoginViewModel = LoginViewModel()){
+    val errorState by viewModel.validationState.collectAsState()
 
     Scaffold{ innerPadding ->
         Column(modifier = Modifier
@@ -53,15 +44,19 @@ fun LoginScreen(){
             LoginHugeText(text = "Sign-up and protect\nyourself with our app")
             EnteringTextField(
                 modifier = Modifier.padding(top = 30.dp, bottom = 100.dp),
-                textValue = textState.value,
-                errorState = LoginTextFieldError.Ok,
+                textValue = viewModel.email.value,
+                errorState = errorState,
                 hint = "Enter your e-mail",
-                onChange = {}
+                onChange = {
+                    viewModel.email.value = it
+                }
             )
             FlatColoredButton(
                 title = "Enter",
-                enabled = true,
-                onClick = {}
+                enabled = !viewModel.email.value.text.isEmpty(),
+                onClick = {
+                    viewModel.regUser()
+                }
             )
             TextButton(title = "Can't get in?", onClick = {})
         }

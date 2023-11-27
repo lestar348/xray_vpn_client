@@ -12,16 +12,22 @@ import androidx.navigation.compose.rememberNavController
 import com.synaptic.xcorevpn.services.navigation.AppRouts
 import com.synaptic.xcorevpn.services.navigation.NavigationService
 import com.synaptic.xcorevpn.services.navigation.navigationGraph
+import com.synaptic.xcorevpn.util.MmkvManager
 
 @Composable
 fun XcoreApp(navController: NavHostController = rememberNavController()) {
     NavigationService.shared = NavigationService(navController = navController)
+    val userID = MmkvManager.getUserID()
     Scaffold (
         containerColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
         NavHost(
             navController = NavigationService.shared.navController,
-            startDestination = AppRouts.Home.name,
+            startDestination = if (userID == null) {
+                AppRouts.Login.name
+            } else {
+                AppRouts.Home.name
+            },
             modifier = Modifier.padding(innerPadding)
         ) {
             navigationGraph()

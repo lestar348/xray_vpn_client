@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,10 +25,11 @@ import com.synaptic.xcorevpn.ui.screens.login.components.LoginHugeText
 import com.synaptic.xcorevpn.ui.theme.LightColors
 
 @Composable
-fun ConfirmEmailScreen(){
+fun ConfirmEmailScreen(viewModel: ConfirmEmailViewModel = ConfirmEmailViewModel()){
     val textState = remember { mutableStateOf(TextFieldValue()) }
+    val errorState by viewModel.validationState.collectAsState()
 
-    Scaffold {
+    Scaffold { it ->
         Column(
             modifier = Modifier
                 .background(brush = LightColors.loginBGGradient)
@@ -41,11 +44,13 @@ fun ConfirmEmailScreen(){
             EnteringTextField(
                 modifier = Modifier.padding(top = 30.dp, bottom = 30.dp),
                 textValue = textState.value,
-                errorState = LoginTextFieldError.Ok,
+                errorState = errorState,
                 hint = "Enter code",
-                onChange = {}
+                onChange = {textValue ->
+                    textState.value = textValue
+                }
             )
-            ConfirmEmailTip("lestar.extr@gmail")
+            ConfirmEmailTip(viewModel.email!!)
 
             // TODO add resend button
 
@@ -53,7 +58,9 @@ fun ConfirmEmailScreen(){
                 modifier = Modifier.padding(top = 45.dp),
                 title = "Enter",
                 enabled = true,
-                onClick = {}
+                onClick = {
+                    viewModel.confirmEmail(code = textState.value.text)
+                }
             )
             TextButton(title = "Can't get in?", onClick = {})
         }

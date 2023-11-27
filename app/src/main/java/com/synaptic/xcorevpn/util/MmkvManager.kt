@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.synaptic.xcorevpn.models.ServerAffiliationInfo
 import com.synaptic.xcorevpn.models.ServerConfig
 import com.synaptic.xcorevpn.models.SubscriptionItem
+import com.synaptic.xcorevpn.services.network.models.Tgdata
 import com.tencent.mmkv.MMKV
 
 
@@ -19,10 +20,37 @@ object MmkvManager {
     const val KEY_SELECTED_SERVER = "SELECTED_SERVER"
     const val KEY_ANG_CONFIGS = "ANG_CONFIGS"
 
+    // User data
+    const val USER_ID = "USER_ID"
+    const val TG_DATA = "TG_DATA"
+    const val USER_EMAIL = "USER_EMAIL"
+
     private val mainStorage by lazy { MMKV.mmkvWithID(ID_MAIN, MMKV.MULTI_PROCESS_MODE) }
     private val serverStorage by lazy { MMKV.mmkvWithID(ID_SERVER_CONFIG, MMKV.MULTI_PROCESS_MODE) }
     private val serverAffStorage by lazy { MMKV.mmkvWithID(ID_SERVER_AFF, MMKV.MULTI_PROCESS_MODE) }
     private val subStorage by lazy { MMKV.mmkvWithID(ID_SUB, MMKV.MULTI_PROCESS_MODE) }
+
+    fun saveEmail(userEmail: String){
+        mainStorage?.encode(USER_EMAIL, userEmail)
+    }
+
+    fun getUserEmail(): String? = mainStorage.decodeString(USER_EMAIL)
+    fun saveUserID(userID: String){
+        mainStorage?.encode(USER_ID, userID)
+    }
+    fun getUserID(): String? = mainStorage.decodeString(USER_ID)
+
+    fun saveTGData(data: Tgdata){
+        mainStorage?.encode(TG_DATA, Gson().toJson(data))
+    }
+    fun getTGData(): Tgdata?{
+        val json = mainStorage?.decodeString(TG_DATA)
+        return if (json.isNullOrBlank()) {
+            null
+        } else {
+            Gson().fromJson(json, Tgdata::class.java)
+        }
+    }
 
     fun decodeServerList(): MutableList<String> {
         val json = mainStorage?.decodeString(KEY_ANG_CONFIGS)

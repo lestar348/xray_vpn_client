@@ -9,7 +9,7 @@ import com.synaptic.xcorevpn.models.ConfigEvent
 import com.synaptic.xcorevpn.models.ProtocolType
 import com.synaptic.xcorevpn.models.ServerConfig
 import com.synaptic.xcorevpn.models.XrayConfig
-import com.synaptic.xcorevpn.services.network.Network
+import com.synaptic.xcorevpn.services.network.NetworkOld
 import com.synaptic.xcorevpn.util.MmkvManager
 import com.tencent.mmkv.MMKV
 import java.util.UUID
@@ -28,7 +28,7 @@ object ConfigurationParser {
     fun getConfiguration(url: Uri) {
         val cleanedURL = cleanURI(url) ?: return
         if (!validateURL(cleanedURL)) return
-        Network().httpGet(cleanedURL.toString()) {
+        NetworkOld().httpGet(cleanedURL.toString()) {
             parseConfiguration(it)
         }
 

@@ -5,6 +5,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.synaptic.xcorevpn.ui.screens.home.HomeScreen
 import com.synaptic.xcorevpn.ui.screens.home.implementation.HomeViewModelImp
+import com.synaptic.xcorevpn.ui.screens.login.ConfirmEmailScreen
+import com.synaptic.xcorevpn.ui.screens.login.LoginScreen
 import com.synaptic.xcorevpn.ui.screens.servers.ServerScreen
 
 enum class AppRouts() {
@@ -30,6 +32,12 @@ fun NavGraphBuilder.navigationGraph(
     }
     composable(AppRouts.ServersList.name) {
         ServerScreen(onBackButtonClick = {})
+    }
+    composable(AppRouts.Login.name) {
+        LoginScreen()
+    }
+    composable(AppRouts.ConfirmEmail.name) {
+        ConfirmEmailScreen()
     }
 
 }
