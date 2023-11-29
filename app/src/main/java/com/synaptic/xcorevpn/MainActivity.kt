@@ -3,6 +3,7 @@ package com.synaptic.xcorevpn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.synaptic.vpn_core_lib.VpnCorePlugin
 import com.synaptic.xcorevpn.models.ConfigEvent
 import com.synaptic.xcorevpn.services.EventHandler
 import com.synaptic.xcorevpn.services.ConfigurationParser
@@ -14,6 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MMKV.initialize(this)
+        val pl = VpnCorePlugin(this)
         setContent {
             XcoreVPNTheme {
                 XcoreApp()

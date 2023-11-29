@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "XcoreVPN"
 include(":app")
- 
+include(":vpn_core_lib")

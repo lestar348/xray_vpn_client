@@ -2,25 +2,18 @@ package com.synaptic.xcorevpn.services
 
 import android.net.Uri
 import android.util.Log
+import com.synaptic.vpn_core_lib.VpnCorePlugin
+import com.synaptic.vpn_core_lib.setup.models.ProtocolType
+import com.synaptic.vpn_core_lib.setup.models.ServerConfig
+import com.synaptic.vpn_core_lib.setup.models.XrayConfig
 import com.synaptic.xcorevpn.AppConstants
-import com.synaptic.xcorevpn.AppConstants.PREF_ALLOW_INSECURE
 import com.synaptic.xcorevpn.extensions.fromBase64
 import com.synaptic.xcorevpn.models.ConfigEvent
-import com.synaptic.xcorevpn.models.ProtocolType
-import com.synaptic.xcorevpn.models.ServerConfig
-import com.synaptic.xcorevpn.models.XrayConfig
 import com.synaptic.xcorevpn.services.network.Network
-import com.synaptic.xcorevpn.util.MmkvManager
-import com.tencent.mmkv.MMKV
+
 import java.util.UUID
 
 object ConfigurationParser {
-    private val settingsStorage by lazy {
-        MMKV.mmkvWithID(
-            MmkvManager.ID_SETTING,
-            MMKV.MULTI_PROCESS_MODE
-        )
-    }
 
     /*
     Parse configuration from Uri with custom schema
@@ -90,7 +83,7 @@ object ConfigurationParser {
         if(serverConfig.subscriptionId.isEmpty()) {
             serverConfig.subscriptionId = UUID.randomUUID().toString()
         }
-        MmkvManager.encodeServerConfig(serverConfig.subscriptionId, serverConfig)
+        VpnCorePlugin.shared.saveServer(serverConfig.subscriptionId, serverConfig)
     }
 
     private fun saveStreamSettings(
@@ -124,7 +117,7 @@ object ConfigurationParser {
             sni = sniString
         }
         val allowInsecure =
-            allowinSecures ?: settingsStorage?.decodeBool(PREF_ALLOW_INSECURE) ?: false
+            allowinSecures ?:  false
 
         streamSetting.populateTlsSettings(
             streamSecurity = security,

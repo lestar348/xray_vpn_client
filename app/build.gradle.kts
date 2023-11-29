@@ -50,21 +50,21 @@ android {
     }
     sourceSets {
         named("main") {
-            jniLibs.srcDirs("libs")
+            //jniLibs.srcDirs("libs")
             java.srcDirs ("src/main/kotlin")
         }
     }
 
 
 
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("x86", "x86_64", "armeabi-v7a", "arm64-v8a") //select ABIs to build APKs for
-            isUniversalApk = true //generate an additional APK that contains all the ABIs
-        }
-    }
+//    splits {
+//        abi {
+//            isEnable = true
+//            reset()
+//            include("x86", "x86_64", "armeabi-v7a", "arm64-v8a") //select ABIs to build APKs for
+//            isUniversalApk = true //generate an additional APK that contains all the ABIs
+//        }
+//    }
 
     compileOptions {
         targetCompatibility = JavaVersion.VERSION_17
@@ -92,8 +92,9 @@ android {
 
 dependencies {
     // Native libs
-    implementation (fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar", "*.so"), "exclude" to listOf<String>())))
+    //implementation (fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar", "*.so"), "exclude" to listOf<String>())))
 
+    implementation(project(mapOf("path" to ":vpn_core_lib")))
     implementation ("androidx.appcompat:appcompat:1.6.1")
 
     // Kotlin
@@ -127,6 +128,7 @@ dependencies {
     //
     implementation ("io.reactivex:rxjava:1.3.8")
     implementation ("io.reactivex:rxandroid:1.2.1")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

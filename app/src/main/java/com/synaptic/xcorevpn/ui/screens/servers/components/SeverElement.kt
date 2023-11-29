@@ -17,10 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.synaptic.vpn_core_lib.setup.models.ServerConfig
 import com.synaptic.xcorevpn.R
 import com.synaptic.xcorevpn.extensions.shadow
-import com.synaptic.xcorevpn.models.ServerConfig
-import com.synaptic.xcorevpn.ui.components.circleButtonShadow
+
 import com.synaptic.xcorevpn.ui.theme.LightColors
 
 @Composable
