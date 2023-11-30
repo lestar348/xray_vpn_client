@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MMKV.initialize(this)
-        val pl = VpnCorePlugin(this)
+        val pl = VpnCorePlugin(this, MainActivity::class)
         setContent {
             XcoreVPNTheme {
                 XcoreApp()

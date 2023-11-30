@@ -32,6 +32,11 @@ object ConfigurationConstants {
 
     const val BROADCAST_ACTION_SERVICE = "com.synaptic.vpn_core.action.service"
     const val BROADCAST_ACTION_ACTIVITY = "com.synaptic.vpn_core.action.activity"
+    const val TASKER_EXTRA_BUNDLE = "com.twofortyfouram.locale.intent.extra.BUNDLE"
+    const val TASKER_EXTRA_STRING_BLURB = "com.twofortyfouram.locale.intent.extra.BLURB"
+    const val TASKER_EXTRA_BUNDLE_SWITCH = "tasker_extra_bundle_switch"
+    const val TASKER_EXTRA_BUNDLE_GUID = "tasker_extra_bundle_guid"
+    const val TASKER_DEFAULT_GUID = "Default"
 
     const val TAG_AGENT = "proxy"
     const val TAG_DIRECT = "direct"

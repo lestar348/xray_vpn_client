@@ -94,8 +94,9 @@ dependencies {
     // Native libs
     //implementation (fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar", "*.so"), "exclude" to listOf<String>())))
 
-    implementation(project(mapOf("path" to ":vpn_core_lib")))
     implementation ("androidx.appcompat:appcompat:1.6.1")
+
+    implementation(project(mapOf("path" to ":vpn_core_lib")))
 
     // Kotlin
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")

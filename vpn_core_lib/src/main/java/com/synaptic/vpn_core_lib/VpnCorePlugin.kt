@@ -16,7 +16,7 @@ import com.tencent.mmkv.MMKV
 
 
 /** VpnCorePlugin */
-class VpnCorePlugin(context: Context) : VpnControl, VpnSettings {
+class VpnCorePlugin(context: Context, val mainIntentClass: Class<Any>) : VpnControl, VpnSettings {
 
     init {
         MMKV.initialize(context)

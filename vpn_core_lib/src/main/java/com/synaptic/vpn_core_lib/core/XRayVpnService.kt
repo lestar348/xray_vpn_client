@@ -1,16 +1,22 @@
 package com.synaptic.vpn_core_lib.core
 
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationChannel.DEFAULT_CHANNEL_ID
+import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.*
 import android.os.Build
 import android.os.ParcelFileDescriptor
 import android.os.StrictMode
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import com.synaptic.vpn_core_lib.ConfigurationConstants
 import com.synaptic.vpn_core_lib.R
 import com.synaptic.vpn_core_lib.interfaces.ServiceControl
@@ -86,10 +92,24 @@ class XRayVpnService : VpnService(), ServiceControl {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
-//        val notification: Notification = NotificationCompat.Builder(this, "1")
+        // For fix - Reason: Context.startForegroundService() did not then call Service.startForeground()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val chan = NotificationChannel(
+//                "VPN_UPDATE",
+//                "Update service",
+//                NotificationManager.IMPORTANCE_NONE
+//            )
+//            chan.lightColor = Color.BLUE
+//            chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+//            val service = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            service.createNotificationChannel(chan)
+//        }
+//
+//        val notification: Notification = NotificationCompat.Builder(this, "VPN_UPDATE")
 //            .setContentTitle("1")
 //            .setContentText("1").build()
 //        startForeground(4, notification)
+
         XRayServiceManager.serviceControl = SoftReference(this)
     }
 
